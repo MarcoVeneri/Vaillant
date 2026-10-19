@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827"><title>Vaillant Remote</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f3f4f6;color:#111827}.app{max-width:520px;margin:auto;padding:22px 18px 40px}.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.brand{font-size:24px;font-weight:750}.dot{width:11px;height:11px;border-radius:50%;background:#9ca3af;display:inline-block;margin-right:7px}.status{font-size:14px;color:#6b7280}.card{background:white;border-radius:22px;padding:22px;box-shadow:0 6px 24px #00000010;margin-bottom:16px}.temp{text-align:center;font-size:64px;font-weight:300}.label{text-align:center;color:#6b7280}.set{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:22px}.round{width:52px;height:52px;border:0;border-radius:50%;font-size:28px;background:#e5e7eb}.target{font-size:30px;font-weight:650}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:18px;padding:19px 10px;font-size:17px;font-weight:700}.on{background:#111827;color:white}.off{background:white;color:#111827;border:1px solid #d1d5db}.home{grid-column:1/-1;background:#fff;color:#111827;border:1px solid #d1d5db}.note{font-size:13px;line-height:1.45;color:#6b7280;padding:5px 3px}button:active{transform:scale(.98)}
+</style></head>
+<body><main class="app"><div class="head"><div class="brand">Riscaldamento</div><div class="status"><span class="dot" id="dot"></span><span id="state">C6 non configurato</span></div></div>
+<section class="card"><div class="label">Temperatura ambiente</div><div class="temp"><span id="room">--</span>°</div><div class="label">Temperatura desiderata</div><div class="set"><button class="round" onclick="change(-.5)">−</button><span class="target"><span id="target">20.0</span>°</span><button class="round" onclick="change(.5)">+</button></div></section>
+<div class="grid"><button class="btn on" onclick="command('on')">🔥 AVVIO MANUALE</button><button class="btn off" onclick="command('off')">SPEGNI</button><button class="btn home" onclick="command('return')">🏠 STO TORNANDO · 20,5°</button></div>
+<p class="note">La PWA è predisposta per il collegamento remoto. I comandi restano disabilitati lato caldaia finché non configuriamo il C6 e identifichiamo i parametri eBUS reali del tuo multiMATIC 700.</p></main>
+<script>
+let t=20;function change(v){t=Math.min(24,Math.max(12,t+v));document.querySelector('#target').textContent=t.toFixed(1);}
+function command(c){if(c==='return'){t=20.5;document.querySelector('#target').textContent=t.toFixed(1)}alert('C6 non ancora configurato. Il comando sarà attivo dopo il collegamento eBUS/MQTT.');}
+</script></body></html>
